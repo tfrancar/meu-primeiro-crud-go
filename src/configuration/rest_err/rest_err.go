@@ -1,5 +1,6 @@
-package resterr_test
+package rest_err
 
+//Pacote responsável por administrar os erros
 import "net/http"
 
 type RestErr struct {
