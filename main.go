@@ -9,6 +9,8 @@ import (
 )
 
 func main() {
+	// gin.SetMode(gin.ReleaseMode)
+
 	err := godotenv.Load() //Variavel que vai armazenar o erro
 	if err != nil {
 		log.Fatal("Error loading .env file")
