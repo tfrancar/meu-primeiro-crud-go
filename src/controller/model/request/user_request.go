@@ -1,6 +1,8 @@
 package request
 
 // Pacote request com o modelo do usuário que será gravado no banco
+// binding é uma requisição do gingonic
+// validator requer que seja utilizado com o validate
 type UserResquest struct {
 	Email    string `json:"email" binding:"required,email"`
 	Password string `json:"password" binding:"required,min=8,containsany=!@#$%*"`
