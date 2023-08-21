@@ -15,7 +15,7 @@ var (
 	LOG_LEVEL  = "LOG_LEVEL"
 )
 
-//ver o vídeo de log do https://www.youtube.com/watch?v=UrZeMk_AxLM
+// ver o vídeo de log do https://www.youtube.com/watch?v=UrZeMk_AxLM
 func init() {
 	logConfig := zap.Config{
 		OutputPaths: []string{getOutputLogs()},
@@ -47,7 +47,7 @@ func Error(message string, err error, tags ...zap.Field) {
 
 func getOutputLogs() string {
 	output := strings.ToLower(strings.TrimSpace(os.Getenv(LOG_OUTPUT)))
-	if output == " " {
+	if output == "" {
 		return "stdout"
 	}
 
