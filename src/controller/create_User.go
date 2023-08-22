@@ -7,8 +7,13 @@ import (
 	"github.com/tfrancar/meu-primeiro-crud-go/src/configuration/logger"
 	"github.com/tfrancar/meu-primeiro-crud-go/src/configuration/validation"
 	"github.com/tfrancar/meu-primeiro-crud-go/src/controller/model/request"
-	"github.com/tfrancar/meu-primeiro-crud-go/src/controller/model/response"
+	"github.com/tfrancar/meu-primeiro-crud-go/src/model"
 	"go.uber.org/zap"
+)
+
+// Pode ser criada uma variável global ou um construtor para que o userdomain
+var (
+	UserDomainInterface model.UserDomainInterface
 )
 
 func CreateUser(c *gin.Context) {
@@ -26,15 +31,20 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
-	response := response.UserResponse{
-		ID:    "test",
-		Email: userRequest.Email,
-		Name:  userRequest.Name,
-		Age:   userRequest.Age,
+	// inicializando o dominio
+	domain := model.NewUserDomain(
+		userRequest.Email,
+		userRequest.Password,
+		userRequest.Name,
+		userRequest.Age,
+	)
+
+	if err := domain.CreateUser(); err != nil {
+		c.JSON(err.Code, err)
 	}
 
 	logger.Info("User created successfully",
 		zap.String("journey", "CreateUser"))
 
-	c.JSON(http.StatusOK, response)
+	c.String(http.StatusOK, "")
 }
