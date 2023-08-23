@@ -5,11 +5,14 @@ import (
 	"github.com/tfrancar/meu-primeiro-crud-go/src/controller"
 )
 
-func InitRoutes(r *gin.RouterGroup) {
+func InitRoutes(
+	r *gin.RouterGroup,
+	userController controller.UserControllerInterface,
+) {
 
-	r.GET("/getUserById/:userId", controller.FindUserByID)
-	r.GET("/getUserByEmail/:userEmail", controller.FindUserByEmail)
-	r.POST("/create_User", controller.CreateUser)
-	r.PUT("/update_User/:userId", controller.UpdateUser)
-	r.DELETE("/delete_User/:userId", controller.DeleteUser)
+	r.GET("/getUserById/:userId", userController.FindUserByID)
+	r.GET("/getUserByEmail/:userEmail", userController.FindUserByEmail)
+	r.POST("/create_User", userController.CreateUser)
+	r.PUT("/update_User/:userId", userController.UpdateUser)
+	r.DELETE("/delete_User/:userId", userController.DeleteUser)
 }
