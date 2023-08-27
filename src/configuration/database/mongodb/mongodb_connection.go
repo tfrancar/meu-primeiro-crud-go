@@ -10,13 +10,6 @@ import (
 
 func InitConnection() {
 
-	username := "admin"
-	password := "admin"
-	host := "localhost"
-	port := 27017
-	authDatabase := "admin"
-	// databaseName := "users"
-
 	uri := fmt.Sprintf("mongodb://%s:%s@%s:%d/%s",
 		username, password, host, port, authDatabase)
 
