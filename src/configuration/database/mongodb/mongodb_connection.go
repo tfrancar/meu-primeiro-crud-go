@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/tfrancar/meu-primeiro-crud-go/src/configuration/logger"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -41,6 +42,7 @@ func NewMongoDBConnection(
 		return nil, err
 	}
 
+	logger.Info("Conectei ao banco de dados")
 	return client.Database(mongo_database), nil
 
 }
