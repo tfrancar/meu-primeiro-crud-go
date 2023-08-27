@@ -3,34 +3,44 @@ package mongodb
 import (
 	"context"
 	"fmt"
+	"os"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func InitConnection() {
+var (
+	MONGO_USERNAME     = "MONGO_USERNAME"
+	MONGO_PASSWORD     = "MONGO_PASSWORD"
+	MONGO_AUTHDATABASE = "MONGO_AUTHDATABASE"
+	MONGO_URL          = "MONGO_URL"
+	MONGO_USER_DB      = "MONGO_USER_DB"
+)
 
-	username := "admin"
-	password := "admin"
-	host := "localhost"
-	port := 27017
-	authDatabase := "admin"
-	// databaseName := "users"
+func NewMongoDBConnection(
+	ctx context.Context,
+) (*mongo.Database, error) {
+	mongo_uri := os.Getenv(MONGO_URL)
+	mongo_user := os.Getenv(MONGO_USERNAME)
+	mongo_pass := os.Getenv(MONGO_PASSWORD)
+	mongo_auth := os.Getenv(MONGO_AUTHDATABASE)
+	mongo_database := os.Getenv(MONGO_USER_DB)
 
-	uri := fmt.Sprintf("mongodb://%s:%s@%s:%d/%s",
-		username, password, host, port, authDatabase)
+	connectionString := fmt.Sprintf("mongodb://%s:%s@%s/%s",
+		mongo_user, mongo_pass, mongo_uri, mongo_auth)
 
-	ctx := context.Background()
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI(uri))
+	client, err := mongo.Connect(
+		ctx,
+		options.Client().ApplyURI(connectionString))
 
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
-	err = client.Disconnect(context.Background())
-	if err != nil {
-		panic(err)
+	if err := client.Ping(ctx, nil); err != nil {
+		return nil, err
 	}
-	fmt.Println("Conexão encerrada.")
+
+	return client.Database(mongo_database), nil
 
 }
