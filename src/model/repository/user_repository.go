@@ -19,7 +19,10 @@ type userRepository struct {
 }
 
 type UserRepository interface {
-	createUser(
+	CreateUser(
 		userDomain model.UserDomainInterface,
-	) (model.UserDomainInterface, *rest_err.RestErr)
+	) (
+		model.UserDomainInterface,
+		*rest_err.RestErr,
+	)
 }
