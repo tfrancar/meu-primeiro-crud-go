@@ -17,7 +17,7 @@ var (
 	UserDomainInterface model.UserDomainInterface
 )
 
-func (uc *userControllerInterface) CreateUser(c *gin.Context) {
+func (uc *userControllerInterface) CreateUserServices(c *gin.Context) {
 	logger.Info("Init CreateUser controller",
 		zap.String("journey", "CreateUser"),
 	)
@@ -41,7 +41,7 @@ func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 	)
 	// inicializando o service
 	// Repassa o domain criado ali em cima para o CreateUser.
-	domainResult, err := uc.service.CreateUser(domain)
+	domainResult, err := uc.service.CreateUserServices(domain)
 	if err != nil {
 		logger.Error(
 			"Error trying to call CreateUser service",

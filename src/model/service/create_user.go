@@ -8,7 +8,7 @@ import (
 )
 
 // Para implementar a função será utilizado um ponteiro de *UserDomain
-func (ud *userDomainService) CreateUser(
+func (ud *userDomainService) CreateUserServices(
 	userDomain model.UserDomainInterface,
 ) (model.UserDomainInterface, *rest_err.RestErr) {
 
