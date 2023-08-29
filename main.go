@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	// gin.SetMode(gin.ReleaseMode)
+	gin.SetMode(gin.DebugMode)
 	logger.Info("About to start application")
 	err := godotenv.Load() //Variavel que vai armazenar o erro
 	if err != nil {
@@ -29,7 +29,7 @@ func main() {
 	router := gin.Default()
 	routes.InitRoutes(&router.RouterGroup, userController)
 
-	if err := router.Run(":8081"); err != nil {
+	if err := router.Run(":8080"); err != nil {
 		logger.Error("Error connection", err)
 	}
 }
