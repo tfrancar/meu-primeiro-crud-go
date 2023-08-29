@@ -9,3 +9,11 @@ type UserResquest struct {
 	Name     string `json:"name" binding:"required,min=4,max=10"`
 	Age      int8   `json:"age" binding:"required,min=1,max=200"`
 }
+
+// Pacote request com o modelo do usuário que será gravado no banco
+// binding é uma requisição do gingonic
+// validator requer que seja utilizado com o validate
+type UserUpdateResquest struct {
+	Name string `json:"name" binding:"omitempy,min=4,max=10"`
+	Age  int8   `json:"age" binding:"omitempy,min=1,max=200"`
+}
