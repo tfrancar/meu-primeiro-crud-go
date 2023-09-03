@@ -14,6 +14,6 @@ type UserResquest struct {
 // binding é uma requisição do gingonic
 // validator requer que seja utilizado com o validate
 type UserUpdateResquest struct {
-	Name string `json:"name" binding:"omitempy,min=4,max=10"`
-	Age  int8   `json:"age" binding:"omitempy,min=1,max=200"`
+	Name string `json:"name" binding:"omitempty,min=4,max=10"`
+	Age  int8   `json:"age" binding:"omitempty,min=1,max=200"`
 }

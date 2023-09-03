@@ -30,7 +30,8 @@ func (ur *userRepository) UpdateUser(
 		return rest_err.NewBadRequestError("UserId is not a valid hex")
 	}
 	filter := bson.D{{Key: "_id", Value: userIdHex}}
-	update := bson.D{{Key: "$set", Value: userIdHex}}
+	update := bson.D{{Key: "$set", Value: value}}
+
 	_, err = collection.UpdateOne(context.Background(), filter, update)
 	if err != nil {
 		logger.Error("Error trying to update user",
@@ -40,7 +41,7 @@ func (ur *userRepository) UpdateUser(
 	}
 
 	logger.Info("UpdateUser repository executed successfully",
-		zap.String("userId", value.ID.Hex()),
+		zap.String("userId", userId),
 		zap.String("journey", "UpdateUser"),
 	)
 

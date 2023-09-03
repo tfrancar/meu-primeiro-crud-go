@@ -12,6 +12,7 @@ func (ud *userDomainService) FindUserByIDServices(
 ) (model.UserDomainInterface, *rest_err.RestErr) {
 	logger.Info("Init FindUserByID Services",
 		zap.String("Journey", "findUserByID"))
+
 	return ud.userRepository.FindUserByID(id)
 }
 
@@ -20,5 +21,6 @@ func (ud *userDomainService) FindUserByEmailServices(
 ) (model.UserDomainInterface, *rest_err.RestErr) {
 	logger.Info("Init FindUserByEmail Services",
 		zap.String("Journey", "findUserByEmail"))
+
 	return ud.userRepository.FindUserByEmail(email)
 }
